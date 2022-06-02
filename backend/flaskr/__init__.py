@@ -1,10 +1,9 @@
-import os
-from flask import Flask, request, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, abort, jsonify, redirect, url_for
+from .models import setup_db, Question, Category
+# from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-import random
+# import random
 
-from models import setup_db, Question, Category
 
 QUESTIONS_PER_PAGE = 10
 
@@ -12,14 +11,18 @@ def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__)
     setup_db(app)
+    CORS(app)
 
-    """
-    @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
-    """
+    cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     """
     @TODO: Use the after_request decorator to set Access-Control-Allow
     """
+    @app.after_request
+    def after_request(response):
+        
+        
+        return response
 
     """
     @TODO:
