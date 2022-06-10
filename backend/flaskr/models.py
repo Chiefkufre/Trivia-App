@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 import json
 
 
@@ -14,6 +15,7 @@ def setup_db(app):
     db.app = app
     db.init_app(app)
     db.create_all()
+    migrate = Migrate(app, db)
 
 """
 Question
